@@ -371,8 +371,7 @@ If a series cannot be found, return nil."
          (tags (org-books-get-thestorygraph-tags page-node)))
     (list title author `(("YEAR" . ,year)
                          ("PAGES" . ,numpages)
-                         ("THESTORYGRAPH-RATING" . ,rating)
-                         ("THESTORYGRAPH-URL" . ,url)
+                         ("STORYGRAPH" . ,url)
                          (:tags . ,tags)))))
 
 (defun org-books-get-thestorygraph-author (page-node)
