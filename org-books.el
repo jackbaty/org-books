@@ -464,7 +464,7 @@ is not supported, throw an error."
     (with-temp-file file-path
       (insert "#+TITLE: Reading List\n"
               "#+AUTHOR: " (replace-regexp-in-string "" " " user-full-name) "\n\n"
-              "#+TODO: READING NEXT | READ\n\n"))))
+              "#+TODO: READING NEXT | DONE\n\n"))))
 
 (defun org-books-all-authors ()
   "Return a list of authors in the `org-books-file'."
@@ -649,11 +649,12 @@ This function keeps track of re-reads. If the book is being re-read,
 the rating and finish date are marked separately for each re-read."
   (interactive "nRating (1-5): ")
   (when (> rating 0)
-    (org-todo "READ")
+    (org-todo "DONE")
     (let* ((times-read (org-books--times-read))
            (finished-prop (org-books--format-property "FINISHED" times-read))
            (rating-prop (org-books--format-property "MY-RATING" times-read)))
-      (org-set-property rating-prop (number-to-string rating))
+      ;;(org-set-property rating-prop (number-to-string rating))
+      (org-set-property "MY-RATING" (s-repeat rating "★"))
       (org-set-property finished-prop (org-books--today-string)))))
 
 ;;;###autoload
